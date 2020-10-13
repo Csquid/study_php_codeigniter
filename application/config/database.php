@@ -1,6 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+# include db_config.json
+$json_string_data = file_get_contents("system/private/db_config.json");
+
+$mysql_config = json_decode($json_string_data, true);
+if ($mysql_config === null) {
+    // deal with error...
+}
+
+// var_dump($mysql_config);
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -73,13 +82,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+$hostname = $mysql_config['localhost']['hostname'];
+$username = $mysql_config['localhost']['username'];
+$password = $mysql_config['localhost']['password'];
+$database = $mysql_config['localhost']['database'];
+
 $db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
-	'dbdriver' => 'mysqli',
+	'dsn' => 'mysql:host='.$hostname.';dbname='.$database,
+	'hostname' => $hostname,
+	'username' => $username,
+	'password' => $password,
+	'database' => $database,
+	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
