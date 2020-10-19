@@ -1,10 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+# 보안문제상 private 폴더를 위에 올려두면 털림
 # include db_config.json
-$json_string_data = file_get_contents("system/private/db_config.json");
+$json_mysql_data = file_get_contents("system/private/db_config.json");
 
-$mysql_config = json_decode($json_string_data, true);
+$mysql_config = json_decode($json_mysql_data, true);
 if ($mysql_config === null) {
     // deal with error...
 }
