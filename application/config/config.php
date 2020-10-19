@@ -26,7 +26,7 @@ $session_config = json_decode($json_session_data, true);
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:81/';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
