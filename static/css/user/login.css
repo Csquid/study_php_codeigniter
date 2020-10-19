@@ -1,0 +1,46 @@
+.login-container {
+    position: relative;
+}
+.login-container input {
+    height: 40px;
+    width: calc(100% - 80px);
+}
+.login-container label {
+    margin-bottom: 5px;
+}
+
+.login-container .input-text {
+    margin-bottom: 5px;
+}
+
+.login-container div {
+    margin-bottom: 5px;
+}
+
+#login-box-pw {
+    margin-top: -6px;
+}
+#login-button {
+    width: 80px;
+    height: 100%;
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+}
+#login-save-box {
+    display: inline-block;
+}
+#register-link-box {
+    display: inline;
+}
+#register-link-box a {
+    text-decoration: none;
+    color: black;
+    float: right;
+}
+#register-link-box a:hover {
+    color: blue;
+}

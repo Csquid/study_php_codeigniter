@@ -1,0 +1,26 @@
+html, body {
+    margin: 0px;
+}
+.container {
+    padding: 5px;
+}
+.users-ul {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+}
+.users-list {
+    display: inline-block;
+    margin-bottom: 10px;
+    list-style: none;
+    border: 1px solid black;
+    padding: 20px;
+
+}
+.users-list:last-child {
+    margin: 0;
+}
+.users-a-list {
+    padding: 20px;
+    text-decoration: none;
+}

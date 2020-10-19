@@ -1,0 +1,21 @@
+.register-container .input-box input {
+    width: 100%;
+    padding: 10px;
+}
+.register-container .input-box {
+    margin-bottom: 10px;
+}
+.register-container .test-box {
+    width: 100%;
+    border: 1px solid black;
+    padding: 20px;
+}
+#register-button {
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    border: 1px solid black;
+}
+#register-button:hover {
+    cursor: pointer;
+}

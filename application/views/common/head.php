@@ -44,13 +44,13 @@
 window.addEventListener('load', function() {
     if (document.querySelector('#nav-login-button')) {
         document.querySelector('#nav-login-button').addEventListener('click', function(e) {
-            if (<?=$this->session->userdata['is_login']?>) {
-                e.preventDefault();
-                alert('이미 로그인 되셧습니다.');
-                console.log('yes');
-            } else {
-                console.log('no');
-            };
+            // if (<?=$this->session->userdata['is_login']?>) {
+            //     e.preventDefault();
+            //     alert('이미 로그인 되셧습니다.');
+            //     console.log('yes');
+            // } else {
+            //     console.log('no');
+            // };
         })
     }
 });
