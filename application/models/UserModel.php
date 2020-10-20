@@ -54,9 +54,27 @@ class UserModel extends CI_Model
             $sendData['error'] = '이메일이 중복 입니다.';
             return $sendData;
         }
+
+        
+
+        /*
+            php 7.0부터 salt는 비권장이 됨
+            
+            $hash_options = [
+                'cost' => 5,
+                'salt' => $this->salt_config['salt']
+            ];
+            
+            $new_password = password_hash($password, PASSWORD_BCRYPT, $hash_options);
+        */
+
+        // 암호화
+        $hash_options = [ 'cost' => 7 ];
+        $new_password = password_hash($password, PASSWORD_BCRYPT, $hash_options);
+
         $queryDataArr = array(
             'id'    => $id, 
-            'pw'    => $password, 
+            'pw'    => $new_password, 
             'name'  => $name, 
             'birth' => $birth, 
             'email' => $email
@@ -77,7 +95,7 @@ class UserModel extends CI_Model
         }
         
     }
-
+    
     function check_overlap($type, $data) {
         $this->db->where($type, $data);  
 
