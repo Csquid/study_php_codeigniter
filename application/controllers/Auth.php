@@ -1,17 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller
+class Auth extends MY_Controller
 {
     public function __construct()
     {
         parent::__construct();
 
-        $this->load->library('user_agent');             // 이전 페이지
-        $this->load->library('form_validation');
-        $this->load->helper('form', 'url');             // redirect(), base_url() 사용하기 위함
-        $this->load->view('/common/head');
-        $this->load->model('UserModel');
+        $this->head();
     }
     public function index()
     {
@@ -72,8 +68,9 @@ class Auth extends CI_Controller
 
             //데이터가 있다면 연관배열 데이터들, 없다면 false
             $session_data = $this->UserModel->login($id, $pass);
-            
-            $this->after_login($session_data);
+            var_dump($session_data);
+
+            // $this->after_login($session_data);
         } else {
             // 아이디 또는 패스워드를 적지 않음
             redirect(base_url() . 'index.php/auth/login/');
@@ -113,14 +110,14 @@ class Auth extends CI_Controller
 
     // 로그인 후 처리
     public function after_login($session_data) {
-        if ($session_data) {  //로그인 성공 
+        if ($session_data['result']) {  //로그인 성공 
             $session_data['is_login'] = true;
 
             unset($session_data['result']);
             $this->session->set_userdata($session_data);
             redirect(base_url() . 'index.php/');
         } else  { //로그인 실패
-            $this->session->set_flashdata('error', '로그인에 실패했습니다');
+            $this->session->set_flashdata('error', $session_data['error']);
             redirect(base_url() . 'index.php/auth/login/');
         }
     }

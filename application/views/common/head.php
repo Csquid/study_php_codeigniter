@@ -20,7 +20,7 @@
     <nav id="navigation">
         <div id="header-nav">
             <a href="/">Home</a>
-            <a href="/item">Item</a>
+            <a href="/board">게시판</a>
             <!-- 만약 로그인이 되지 않았다면  -->
             <?php  if($this->session->userdata['is_login'] === FALSE) { ?>
 

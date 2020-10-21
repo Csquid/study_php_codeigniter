@@ -9,6 +9,11 @@ class UserModel extends CI_Model
 
     function login($id, $password)  
     {  
+        $sendData = array(
+            'result' => false,
+            'user_data' => null,
+            'error' => ''
+        );
         /* 
         SQL문장을 직접 사용하는 예
             $sql    = "SELECT id FROM users WHERE id=? AND password=?";
@@ -17,27 +22,32 @@ class UserModel extends CI_Model
             else  { return false; }
         */
         $this->db->where('id', $id);  
-        $this->db->where('pw', $password);  
+        // $this->db->where('pw', $password);  
 
         //SELECT * FROM member WHERE id = '$id' AND password = '$password' 
         $result = $this->db->get('member');  //Query 실행
         $data = $result->row();
-
-        // 만약 데이터가 있다면
-        if ($data)  { 
-            $sendData = array(
-                'user_data' => array(
-                    'id'   => $data->id,
-                    'name' => $data->name,
-                    'role' => $data->role
-                )
-            );
+        
+        if($data == null) {
+            $sendData['error'] = '아이디가 존재하지 않습니다.';
             return $sendData;
         }
-        else  { 
-            return false; 
-        }
 
+        $hash = $data->pw;
+
+        if(password_verify($password, $hash)) {
+            $sendData['result'] = true;
+            $sendData['user_data'] = array(
+                'id'   => $data->id,
+                'name' => $data->name,
+                'role' => $data->role
+            );
+            return $sendData;
+        } else {
+            $sendData['error'] = '패스워드가 일치하지 않습니다.';
+            return $sendData;
+        }
+            
     }  
 
     function register($id, $password, $name, $birth, $email) {
@@ -55,8 +65,6 @@ class UserModel extends CI_Model
             return $sendData;
         }
 
-        
-
         /*
             php 7.0부터 salt는 비권장이 됨
             
@@ -69,9 +77,9 @@ class UserModel extends CI_Model
         */
 
         // 암호화
-        $hash_options = [ 'cost' => 7 ];
-        $new_password = password_hash($password, PASSWORD_BCRYPT, $hash_options);
-
+        // $hash_options = [ 'cost' => 7 ];
+        
+        $new_password = password_hash($password, PASSWORD_DEFAULT);
         $queryDataArr = array(
             'id'    => $id, 
             'pw'    => $new_password, 
@@ -79,7 +87,7 @@ class UserModel extends CI_Model
             'birth' => $birth, 
             'email' => $email
         );
-    
+        
         // 반환값: true, false
         if($this->db->insert('member', $queryDataArr)) {
             $sendData['result'] = true;
