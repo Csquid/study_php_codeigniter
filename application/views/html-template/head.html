@@ -1,0 +1,77 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEAD Title</title>
+    <style>
+        #navigation {
+            background-color: #FFFFFF;
+            position: sticky;
+            top: 0px;
+            height: 80px;
+            line-height: 80px;
+            border-bottom: 2px solid #964B00;
+            background-color: #303030;
+        }
+
+        #header-nav {
+            justify-content: flex-start;
+            /* display: flex; */
+            margin: auto;
+            width: 100%;
+        }
+
+        #navigation a {
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 40px 0 40px;
+            /* transition: all 1.2s ease; */
+        }
+
+        #navigation a:link {
+            text-decoration: none;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .floating-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            display: inline-block;
+            border: 1px solid black;
+            padding: 25px 30px;
+            width: 267px;
+            height: fit-content
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
+
+</head>
+
+<header>
+    <nav id="navigation">
+        <div id="header-nav">
+            <a href="/">Home</a>
+            <a href="/index.php/board">게시판</a>
+            <div class="float-right">
+                <a id='nav-login-button' href='/index.php/auth/login'>Login</a>
+            </div>
+        </div>
+    </nav>
+</header>

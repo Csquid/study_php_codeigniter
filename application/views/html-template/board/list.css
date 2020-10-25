@@ -1,0 +1,48 @@
+.board-container {
+    width: 1200px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.board-container table {
+    width: 100%;
+    border-top: 2px solid #444444;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.board-container td, th {
+    padding: 10px;
+}
+.board-container th {
+    border-bottom: 2px solid #444444;
+}
+.board-container td {
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.board-container th:first-child {
+    width: 50px;
+}
+.board-container #board-create {
+    text-align: right;
+    padding: 10px 0px;
+    margin-top: 20px;
+}
+.board-container #board-create a {
+    padding: 5px 10px;
+    border: 2px solid #333333;
+}
+.pagination-wrap {
+    text-align: center;
+}
+.pagination {
+    display: inline-block;
+}
+.item {
+    display: inline;
+    list-style: none;
+}
+.item:first-child, .item:last-child {
+    margin: 0 20px;
+}
