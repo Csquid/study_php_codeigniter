@@ -21,7 +21,20 @@
         </div>
     </div>
 </form>
-
+<script>
+    window.addEventListener('load', function() {
+        // document.querySelector('#')
+    })
+</script>
+<!-- 
+<?php if($this->session->userdata('is_login')) {?>
+<script>
+    history.go(-2);
+</script>
+<?php }?>
+<script> -->
+    
+</script>
 <?php if($this->session->flashdata('error')) { ?>
 <script>
     alert('<?=$this->session->flashdata('error') ?>');
