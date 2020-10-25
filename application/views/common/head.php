@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEAD Title</title>
     <link rel='stylesheet' href='/static/css/pracdb.css'>
-    <link rel='stylesheet' href='/static/css/pracdb_table.css'>
     <link rel="stylesheet" href="/static/css/user/login.css">
     <link rel="stylesheet" href="/static/css/user/register.css">
     <link rel="stylesheet" href="/static/css/head.css">
@@ -20,7 +19,7 @@
     <nav id="navigation">
         <div id="header-nav">
             <a href="/">Home</a>
-            <a href="/board">게시판</a>
+            <a href="/index.php/board">게시판</a>
             <!-- 만약 로그인이 되지 않았다면  -->
             <?php  if($this->session->userdata['is_login'] === FALSE) { ?>
 
