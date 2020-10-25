@@ -11,6 +11,5 @@ class MY_Controller extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->helper('form', 'url');             // redirect(), base_url() 사용하기 위함
         $this->load->view('/common/head');
-        $this->load->model('UserModel');
     }
 }
