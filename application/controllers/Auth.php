@@ -1,16 +1,22 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+//TODO: 로그인, 회원가입 ajax 비동기 통신으로 처리
+
 class Auth extends MY_Controller
 {
+    public $prevPage = null;
     public function __construct()
     {
         parent::__construct();
 
         $this->head();
+        $this->load->model('UserModel');
+        $this->prevPage = $_SERVER["HTTP_REFERER"];
     }
     public function index()
     {
+        $this->prevPage = $_SERVER["HTTP_REFERER"];
         redirect(base_url() . 'index.php/');
     }
     // 로그인
@@ -18,7 +24,9 @@ class Auth extends MY_Controller
     {
         // 로그인이 되어있는 상태에서 url로 들어오는것을 방지하기 위함
         if ($this->session->userdata('is_login')) {
+            // return;
             redirect(base_url() . 'index.php/');
+            // redirect($this->prevPage);
         }
 
         $this->load->view('/user/login');
@@ -29,16 +37,9 @@ class Auth extends MY_Controller
         // 만약 로그인이 되어있다면
         if ($this->session->userdata('is_login')) {
             $this->session->sess_destroy();
-
-            /*
-                unset(
-                    $_SESSION['user']['id'],
-                    $_SESSION['user']['name'],
-                    $_SESSION['user']['role']
-                );
-            */
             $this->session->set_userdata('is_login', false);
-            redirect(base_url() . 'index.php/');
+            // header("location:".$prevPage);
+            redirect($this->prevPage);
         } else {
             return;
         }
@@ -68,9 +69,8 @@ class Auth extends MY_Controller
 
             //데이터가 있다면 연관배열 데이터들, 없다면 false
             $session_data = $this->UserModel->login($id, $pass);
-            var_dump($session_data);
-
-            // $this->after_login($session_data);
+            // var_dump($session_data);
+            $this->after_login($session_data);
         } else {
             // 아이디 또는 패스워드를 적지 않음
             redirect(base_url() . 'index.php/auth/login/');
@@ -109,16 +109,17 @@ class Auth extends MY_Controller
     }
 
     // 로그인 후 처리
-    public function after_login($session_data) {
+    private function after_login($session_data) {
         if ($session_data['result']) {  //로그인 성공 
             $session_data['is_login'] = true;
 
             unset($session_data['result']);
+            
             $this->session->set_userdata($session_data);
-            redirect(base_url() . 'index.php/');
+            // redirect($this->prevPage);
         } else  { //로그인 실패
             $this->session->set_flashdata('error', $session_data['error']);
-            redirect(base_url() . 'index.php/auth/login/');
         }
+        redirect(base_url() . 'index.php/auth/login/');
     }
 }
